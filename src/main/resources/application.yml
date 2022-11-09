@@ -18,15 +18,15 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:8080/music_local
+    url: jdbc:mysql://music.cvxnamrzwznx.ap-northeast-2.rds.amazonaws.com/music
 
-    username: root
-    password: 0118
+    username: admin
+    password: 20000118
 
   main:
     allow-circular-references: true
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
