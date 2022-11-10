@@ -39,4 +39,24 @@ public class HomeService {
                 .getPlaylistResList(getPlaylistResList).build();
         return getHomeRes;
     }
+
+    public GetHomeRes homeFeeling(Long user_id, String feeling) {
+        Optional<User> user = userRepository.findById(user_id);
+        List<Playlist> playlistList = playlistRepository.findByUserId(user_id);
+
+        List<GetPlaylistRes> getPlaylistResList = new ArrayList<>();
+        for (Playlist p : playlistList) {
+            GetPlaylistRes getPlaylistRes = GetPlaylistRes.builder()
+                    .playlist_id(p.getId())
+                    .name(p.getName())
+                    .image(p.getImage())
+                    .musics(null).build(); // home에서는 music 필요 x
+            getPlaylistResList.add(getPlaylistRes);
+        }
+
+        GetHomeRes getHomeRes = GetHomeRes.builder()
+                .username(user.get().getUsername())
+                .getPlaylistResList(getPlaylistResList).build();
+        return getHomeRes;
+    }
 }

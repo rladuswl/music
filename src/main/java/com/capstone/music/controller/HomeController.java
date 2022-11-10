@@ -3,9 +3,7 @@ package com.capstone.music.controller;
 import com.capstone.music.dto.GetHomeRes;
 import com.capstone.music.service.HomeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,4 +19,10 @@ public class HomeController {
     }
 
     // 감정 선택
+    @GetMapping("/home/{user_id}/feeling")
+    public GetHomeRes homeFeeling(@PathVariable Long user_id, @RequestParam String f) {
+        GetHomeRes getHomeRes = homeService.homeFeeling(user_id, f);
+        return getHomeRes;
+    }
+
 }

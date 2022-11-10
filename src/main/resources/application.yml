@@ -1,3 +1,10 @@
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+
 server:
   port: 8080
   servlet:
@@ -30,3 +37,14 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+cloud:
+  aws:
+    s3:
+      bucket: myongji-music
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      instanceProfile: true
