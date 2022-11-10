@@ -1,5 +1,6 @@
 package com.capstone.music.controller;
 
+import com.capstone.music.dto.GetFeelingRes;
 import com.capstone.music.dto.GetHomeRes;
 import com.capstone.music.service.HomeService;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,9 @@ public class HomeController {
 
     // 감정 선택
     @GetMapping("/home/{user_id}/feeling")
-    public GetHomeRes homeFeeling(@PathVariable Long user_id, @RequestParam String f) {
-        GetHomeRes getHomeRes = homeService.homeFeeling(user_id, f);
-        return getHomeRes;
+    public GetFeelingRes homeFeeling(@PathVariable Long user_id, @RequestParam String f) {
+        GetFeelingRes getFeelingRes = homeService.homeFeeling(user_id, f);
+        return getFeelingRes;
     }
 
 }
