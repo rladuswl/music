@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class MusicPlaylist {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "music_id")
