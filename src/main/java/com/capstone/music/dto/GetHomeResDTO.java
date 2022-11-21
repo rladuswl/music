@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class GetHomeRes {
+public class GetHomeResDTO {
     private String username;
-    private List<GetPlaylistRes> getPlaylistResList;
+    private List<GetPlaylistResDTO> getPlaylistResDTOList;
 }

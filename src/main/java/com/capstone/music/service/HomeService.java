@@ -4,8 +4,8 @@ import com.capstone.music.domain.Music;
 import com.capstone.music.domain.Playlist;
 import com.capstone.music.domain.User;
 import com.capstone.music.dto.GetFeelingResDTO;
-import com.capstone.music.dto.GetHomeRes;
-import com.capstone.music.dto.GetPlaylistRes;
+import com.capstone.music.dto.GetHomeResDTO;
+import com.capstone.music.dto.GetPlaylistResDTO;
 import com.capstone.music.repository.MusicRepository;
 import com.capstone.music.repository.PlaylistRepository;
 import com.capstone.music.repository.UserRepository;
@@ -25,24 +25,24 @@ public class HomeService {
     private final PlaylistRepository playlistRepository;
     private final MusicRepository musicRepository;
 
-    public GetHomeRes home(Long user_id) {
+    public GetHomeResDTO home(Long user_id) {
         Optional<User> user = userRepository.findById(user_id);
         List<Playlist> playlistList = playlistRepository.findByUserId(user_id);
 
-        List<GetPlaylistRes> getPlaylistResList = new ArrayList<>();
+        List<GetPlaylistResDTO> getPlaylistResDTOList = new ArrayList<>();
         for (Playlist p : playlistList) {
-            GetPlaylistRes getPlaylistRes = GetPlaylistRes.builder()
+            GetPlaylistResDTO getPlaylistResDTO = GetPlaylistResDTO.builder()
                     .playlist_id(p.getId())
                     .name(p.getName())
                     .image(p.getImage())
                     .musics(null).build(); // home에서는 music 필요 x
-            getPlaylistResList.add(getPlaylistRes);
+            getPlaylistResDTOList.add(getPlaylistResDTO);
         }
 
-        GetHomeRes getHomeRes = GetHomeRes.builder()
+        GetHomeResDTO getHomeResDTO = GetHomeResDTO.builder()
                 .username(user.get().getUsername())
-                .getPlaylistResList(getPlaylistResList).build();
-        return getHomeRes;
+                .getPlaylistResDTOList(getPlaylistResDTOList).build();
+        return getHomeResDTO;
     }
 
     public GetFeelingResDTO homeFeeling(Long user_id, String feeling) {

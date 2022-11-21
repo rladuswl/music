@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class GetPlaylistRes {
+public class GetPlaylistResDTO {
     private Long playlist_id;
     private String name;
     private String image;
