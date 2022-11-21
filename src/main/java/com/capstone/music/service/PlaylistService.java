@@ -38,6 +38,7 @@ public class PlaylistService {
                     .image(p.getImage()).build();
             getPlaylistResList.add(getPlaylistRes);
         }
+        return getPlaylistResList;
     }
 
     public String newPlaylist(Long playlist_id) {
