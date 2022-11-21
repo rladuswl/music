@@ -1,5 +1,6 @@
 package com.capstone.music.dto;
 
+import com.capstone.music.domain.Music;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,5 +12,5 @@ public class GetPlaylistRes {
     private Long playlist_id;
     private String name;
     private String image;
-    private List<String> musics;
+    private List<Music> musics;
 }

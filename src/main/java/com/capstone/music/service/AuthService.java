@@ -4,6 +4,8 @@ import com.capstone.music.domain.Music;
 import com.capstone.music.domain.User;
 import com.capstone.music.dto.GetFeelingResDTO;
 import com.capstone.music.dto.JoinReqDTO;
+import com.capstone.music.dto.LoginReqDTO;
+import com.capstone.music.dto.LoginResDTO;
 import com.capstone.music.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,5 +32,17 @@ public class AuthService {
         return "회원가입 완료";
     }
 
+    public LoginResDTO login(LoginReqDTO loginReqDTO) {
+        User user = userRepository.findByUsername(loginReqDTO.getUsername());
 
+        if (user.getPassword() == loginReqDTO.getPassword()) {
+            LoginResDTO loginResDTO = LoginResDTO.builder()
+                    .id(user.getId()).build();
+
+            return loginResDTO;
+        }
+        else {
+            return null;
+        }
+    }
 }

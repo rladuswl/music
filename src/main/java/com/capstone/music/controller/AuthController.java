@@ -5,6 +5,7 @@ import com.capstone.music.dto.LoginReqDTO;
 import com.capstone.music.dto.LoginResDTO;
 import com.capstone.music.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,4 +31,7 @@ public class AuthController {
     }
 
     // 회원 탈퇴
+    @PostMapping ("/user/{user_id}")
+    public void out(@PathVariable Long user_id) {
+    }
 }

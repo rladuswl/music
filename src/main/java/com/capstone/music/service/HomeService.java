@@ -3,7 +3,7 @@ package com.capstone.music.service;
 import com.capstone.music.domain.Music;
 import com.capstone.music.domain.Playlist;
 import com.capstone.music.domain.User;
-import com.capstone.music.dto.GetFeelingRes;
+import com.capstone.music.dto.GetFeelingResDTO;
 import com.capstone.music.dto.GetHomeRes;
 import com.capstone.music.dto.GetPlaylistRes;
 import com.capstone.music.repository.MusicRepository;
@@ -45,14 +45,14 @@ public class HomeService {
         return getHomeRes;
     }
 
-    public GetFeelingRes homeFeeling(Long user_id, String feeling) {
+    public GetFeelingResDTO homeFeeling(Long user_id, String feeling) {
         List<Music> musicList = musicRepository.findByFeeling(feeling);
         int music_size = musicList.size();
 
         Random rand = new Random();
         int result = rand.nextInt(music_size);
 
-        GetFeelingRes getFeelingRes = GetFeelingRes.builder()
+        GetFeelingResDTO getFeelingRes = GetFeelingResDTO.builder()
                 .title(musicList.get(result).getTitle())
                 .file(musicList.get(result).getFile())
                 .feeling(musicList.get(result).getFeeling()).build();
