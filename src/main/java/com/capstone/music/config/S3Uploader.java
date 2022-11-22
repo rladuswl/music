@@ -2,6 +2,7 @@ package com.capstone.music.config;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -67,4 +68,105 @@ public class S3Uploader {
 
         return Optional.empty();
     }
+
+    // s3 파일 삭제하기
+    public void deleteS3(String bucket, String source) {
+        amazonS3Client.deleteObject(bucket, source);
+//        amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, source));
+    }
+
+    // s3 파일 다운로드
+    /*
+    public boolean download(String fileKey, String downloadFileName, HttpServletRequest request, HttpServletResponse response) {
+        if (fileKey == null) {
+            return false;
+        }
+        S3Object fullObject = null;
+        try {
+            fullObject = s3Client.getObject(bucketName, fileKey);
+            if (fullObject == null) {
+                return false;
+            }
+        } catch (AmazonS3Exception e) {
+            throw new BadRequestException("다운로드 파일이 존재하지 않습니다.");
+        }
+
+        OutputStream os = null;
+        FileInputStream fis = null;
+        boolean success = false;
+        try {
+            S3ObjectInputStream objectInputStream = fullObject.getObjectContent();
+            byte[] bytes = IOUtils.toByteArray(objectInputStream);
+
+            String fileName = null;
+            if(downloadFileName != null) {
+                //fileName= URLEncoder.encode(downloadFileName, "UTF-8").replaceAll("\\+", "%20");
+                fileName=  getEncodedFilename(request, downloadFileName);
+            } else {
+                fileName=  getEncodedFilename(request, fileKey); // URLEncoder.encode(fileKey, "UTF-8").replaceAll("\\+", "%20");
+            }
+
+            response.setContentType("application/octet-stream;charset=UTF-8");
+            response.setHeader("Content-Transfer-Encoding", "binary");
+            response.setHeader( "Content-Disposition", "attachment; filename=\"" + fileName + "\";" );
+            response.setHeader("Content-Length", String.valueOf(fullObject.getObjectMetadata().getContentLength()));
+            response.setHeader("Set-Cookie", "fileDownload=true; path=/");
+            FileCopyUtils.copy(bytes, response.getOutputStream());
+            success = true;
+        } catch (IOException e) {
+            log.debug(e.getMessage(), e);
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+                log.debug(e.getMessage(), e);
+            }
+            try {
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                log.debug(e.getMessage(), e);
+            }
+        }
+        return success;
+    }
+
+//     * 파일명이 한글인 경우 URL encode이 필요함.
+//     * @param request
+//     * @param displayFileName
+//     * @return
+//     * @throws UnsupportedEncodingException
+
+    private String getEncodedFilename(HttpServletRequest request, String displayFileName) throws UnsupportedEncodingException {
+        String header = request.getHeader("User-Agent");
+
+        String encodedFilename = null;
+        if (header.indexOf("MSIE") > -1) {
+            encodedFilename = URLEncoder.encode(displayFileName, "UTF-8").replaceAll("\\+", "%20");
+        } else if (header.indexOf("Trident") > -1) {
+            encodedFilename = URLEncoder.encode(displayFileName, "UTF-8").replaceAll("\\+", "%20");
+        } else if (header.indexOf("Chrome") > -1) {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < displayFileName.length(); i++) {
+                char c = displayFileName.charAt(i);
+                if (c > '~') {
+                    sb.append(URLEncoder.encode("" + c, "UTF-8"));
+                } else {
+                    sb.append(c);
+                }
+            }
+            encodedFilename = sb.toString();
+        } else if (header.indexOf("Opera") > -1) {
+            encodedFilename = "\"" + new String(displayFileName.getBytes("UTF-8"), "8859_1") + "\"";
+        } else if (header.indexOf("Safari") > -1) {
+            encodedFilename = URLDecoder.decode("\"" + new String(displayFileName.getBytes("UTF-8"), "8859_1") + "\"", "UTF-8");
+        } else {
+            encodedFilename = URLDecoder.decode("\"" + new String(displayFileName.getBytes("UTF-8"), "8859_1") + "\"", "UTF-8");
+        }
+        return encodedFilename;
+    }
+    */
 }
