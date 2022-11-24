@@ -1,15 +1,12 @@
 package com.capstone.music.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +19,7 @@ public class User {
     private String nickname;
     private String profile;
     private String introduce;
+    private Boolean status;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Playlist> playlists;

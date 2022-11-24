@@ -25,7 +25,8 @@ public class AuthService {
                 .password(joinReqDTO.getPassword())
                 .nickname(joinReqDTO.getNickname())
                 .profile(joinReqDTO.getProfile())
-                .introduce(joinReqDTO.getIntroduce()).build();
+                .introduce(joinReqDTO.getIntroduce())
+                .status(true).build();
 
         userRepository.save(user);
 

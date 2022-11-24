@@ -29,9 +29,4 @@ public class AuthController {
         LoginResDTO loginResDTO = authService.login(loginReqDTO);
         return loginResDTO;
     }
-
-    // 회원 탈퇴
-    @PostMapping ("/user/{user_id}")
-    public void out(@PathVariable Long user_id) {
-    }
 }
