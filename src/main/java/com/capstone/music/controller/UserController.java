@@ -22,8 +22,8 @@ public class UserController {
 
     // 내 정보 수정
     @PatchMapping("/user/{user_id}")
-    public ResponseEntity<String> updateMyPage(@PathVariable Long user_id) {
-        userService.updateMyPage(user_id);
+    public ResponseEntity<String> updateMyPage(@PathVariable Long user_id, @RequestBody GetMypageResDTO getMypageResDTO) {
+        userService.updateMyPage(user_id, getMypageResDTO);
         return new ResponseEntity<>("내 정보 수정 완료", HttpStatus.OK);
     }
 

@@ -26,7 +26,15 @@ public class UserService {
         return getMypageResDTO;
     }
 
-    public String updateMyPage(Long user_id) {
+    public String updateMyPage(Long user_id, GetMypageResDTO getMypageResDTO) {
+        Optional<User> user = userRepository.findById(user_id);
+
+        user.get().setNickname(getMypageResDTO.getNickname());
+        user.get().setProfile(getMypageResDTO.getProfile());
+        user.get().setIntroduce(getMypageResDTO.getIntroduce());
+
+        userRepository.save(user.get());
+
         return "내 정보 수정 완료";
     }
 
