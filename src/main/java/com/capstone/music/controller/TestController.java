@@ -18,8 +18,8 @@ public class TestController {
 
     // 테스트 시작 + 결과 응답
     @PostMapping("/test/user/{user_id}")
-    public ResponseEntity<> join(@PathVariable Long user_id) throws IOException {
+    public ResponseEntity<String> join(@PathVariable Long user_id) throws IOException {
 
-        return new ResponseEntity<>(, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
