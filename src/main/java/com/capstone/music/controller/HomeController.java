@@ -20,8 +20,8 @@ public class HomeController {
     }
 
     // 감정 선택
-    @GetMapping("/home/{user_id}/feeling")
-    public GetFeelingResDTO homeFeeling(@PathVariable Long user_id, @RequestParam String f) {
+    @PostMapping("/home/{user_id}/feeling")
+    public GetFeelingResDTO homeFeeling(@PathVariable Long user_id, @RequestParam("feeling") String f) {
         GetFeelingResDTO getFeelingRes = homeService.homeFeeling(user_id, f);
         return getFeelingRes;
     }

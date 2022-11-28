@@ -14,7 +14,7 @@ public class MusicService {
 
     public String save(String uploadImageUrl, String feeling) {
         Music music = new Music();
-        music.setTitle(feeling+ "/" + UUID.randomUUID());
+        music.setTitle(feeling);
         music.setFile(uploadImageUrl);
         music.setFeeling(feeling);
         musicRepository.save(music);

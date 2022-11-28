@@ -16,7 +16,7 @@ public class MusicController {
 
     // AI -> Database로 노래 전송
     @PostMapping("/music/add")
-    public ResponseEntity<String> addMusic(@RequestPart MultipartFile multipartFile, @RequestParam("feeling") String feeling) throws Exception {
+    public ResponseEntity<String> addMusic(@RequestPart("music") MultipartFile multipartFile, @RequestParam("feeling") String feeling) throws Exception {
         String dirName;
 
         if (feeling == "happy") {
