@@ -23,10 +23,6 @@ public class MusicController {
             dirName = "happy";
         } else if (feeling == "sad") {
             dirName = "sad";
-        } else if (feeling == "excited") {
-            dirName = "excited";
-        } else if (feeling == "love") {
-            dirName = "love";
         } else if (feeling == "anger") {
             dirName = "anger";
         } else {

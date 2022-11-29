@@ -1,6 +1,5 @@
 package com.capstone.music.controller;
 
-import com.capstone.music.config.S3Uploader;
 import com.capstone.music.dto.GetPlaylistResDTO;
 import com.capstone.music.service.PlaylistService;
 import lombok.RequiredArgsConstructor;
