@@ -19,12 +19,12 @@ public class MusicController {
     public ResponseEntity<String> addMusic(@RequestPart("music") MultipartFile multipartFile, @RequestParam("feeling") String feeling) throws Exception {
         String dirName;
 
-        if (feeling == "happy") {
-            dirName = "happy";
+        if (feeling == "excited") {
+            dirName = "excited";
         } else if (feeling == "sad") {
             dirName = "sad";
-        } else if (feeling == "anger") {
-            dirName = "anger";
+        } else if (feeling == "peaceful") {
+            dirName = "peaceful";
         } else {
             dirName = "happy"; // 기본값
         }
