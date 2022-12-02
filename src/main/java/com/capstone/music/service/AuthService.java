@@ -23,16 +23,16 @@ public class AuthService {
     private final UserRepository userRepository;
     private final S3Uploader s3Uploader;
 
-    public String join(MultipartFile multipartFile, JoinReqDTO joinReqDTO) throws IOException {
+    public String join(MultipartFile multipartFile, String username, String password, String nickname, String introduce) throws IOException {
         String dirName = "user";
         String uploadImageUrl = s3Uploader.upload(multipartFile, dirName);
 
         User user = User.builder()
-                .username(joinReqDTO.getUsername())
-                .password(joinReqDTO.getPassword())
-                .nickname(joinReqDTO.getNickname())
+                .username(username)
+                .password(password)
+                .nickname(nickname)
                 .profile(uploadImageUrl)
-                .introduce(joinReqDTO.getIntroduce())
+                .introduce(introduce)
                 .status(true).build();
 
         userRepository.save(user);
