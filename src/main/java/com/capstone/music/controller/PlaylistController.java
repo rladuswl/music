@@ -32,10 +32,10 @@ public class PlaylistController {
     }
 
     // 플레이리스트 생성
-    @PostMapping ("/playlist/new")
-    public ResponseEntity<String> newPlaylist(@RequestPart("image") MultipartFile multipartFile, @RequestParam String name) throws IOException {
+    @PostMapping ("/playlist/new/user/{user_id}")
+    public ResponseEntity<String> newPlaylist(@PathVariable Long user_id, @RequestPart("image") MultipartFile multipartFile, @RequestParam("name") String name) throws IOException {
 
-        return new ResponseEntity<>("new 플레이리스트 id : " + playlistService.newPlaylist(multipartFile, name), HttpStatus.OK);
+        return new ResponseEntity<>("new 플레이리스트 id : " + playlistService.newPlaylist(user_id, multipartFile, name), HttpStatus.OK);
     }
 
     // 플레이리스트 수정
@@ -52,7 +52,7 @@ public class PlaylistController {
         return new ResponseEntity<>("플레이리스트 삭제 완료", HttpStatus.OK);
     }
 
-    // 플레이리스트 추가
+    // 플레이리스트에 노래 추가
     @PostMapping ("/playlist/{playlist_id}/music/{music_id}")
     public ResponseEntity<String> addPlaylist(@PathVariable Long playlist_id, @PathVariable Long music_id) {
         playlistService.addPlaylist(playlist_id, music_id);

@@ -4,10 +4,12 @@ import com.capstone.music.config.S3Uploader;
 import com.capstone.music.domain.Music;
 import com.capstone.music.domain.MusicPlaylist;
 import com.capstone.music.domain.Playlist;
+import com.capstone.music.domain.User;
 import com.capstone.music.dto.GetPlaylistResDTO;
 import com.capstone.music.repository.MusicPlaylistRepository;
 import com.capstone.music.repository.MusicRepository;
 import com.capstone.music.repository.PlaylistRepository;
+import com.capstone.music.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +24,7 @@ import java.util.Optional;
 public class PlaylistService {
 
     private final PlaylistRepository playlistRepository;
+    private final UserRepository userRepository;
     private final MusicRepository musicRepository;
     private final MusicPlaylistRepository musicPlaylistRepository;
     private final S3Uploader s3Uploader;
@@ -62,13 +65,15 @@ public class PlaylistService {
                 .musics(musicList).build();
     }
 
-    public Long newPlaylist(MultipartFile multipartFile, String name) throws IOException {
+    public Long newPlaylist(Long user_id, MultipartFile multipartFile, String name) throws IOException {
+        Optional<User> user = userRepository.findById(user_id);
         String dirName = "playlist";
         String uploadImageUrl = s3Uploader.upload(multipartFile, dirName);
 
         Playlist playlist = Playlist.builder()
                 .image(uploadImageUrl)
-                .name(name).build();
+                .name(name)
+                .user(user.get()).build();
         playlistRepository.save(playlist);
         return playlist.getId();
     }
