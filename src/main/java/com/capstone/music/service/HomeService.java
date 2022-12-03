@@ -40,7 +40,7 @@ public class HomeService {
         }
 
         GetHomeResDTO getHomeResDTO = GetHomeResDTO.builder()
-                .username(user.get().getUsername())
+                .nickname(user.get().getNickname())
                 .getPlaylistResDTOList(getPlaylistResDTOList).build();
         return getHomeResDTO;
     }

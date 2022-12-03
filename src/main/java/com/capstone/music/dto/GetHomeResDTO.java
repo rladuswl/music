@@ -8,6 +8,6 @@ import java.util.List;
 @Getter
 @Builder
 public class GetHomeResDTO {
-    private String username;
+    private String nickname;
     private List<GetPlaylistResDTO> getPlaylistResDTOList;
 }

@@ -43,14 +43,9 @@ public class AuthService {
     public LoginResDTO login(LoginReqDTO loginReqDTO) throws IOException {
         User user = userRepository.findByUsername(loginReqDTO.getUsername());
 
-        if (user.getPassword() == loginReqDTO.getPassword()) {
-            LoginResDTO loginResDTO = LoginResDTO.builder()
-                    .id(user.getId()).build();
+        LoginResDTO loginResDTO = LoginResDTO.builder()
+                .id(user.getId()).build();
 
-            return loginResDTO;
-        }
-        else {
-            return null;
-        }
+        return loginResDTO;
     }
 }
