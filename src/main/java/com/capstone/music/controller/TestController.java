@@ -1,6 +1,7 @@
 package com.capstone.music.controller;
 
 import com.capstone.music.dto.JoinReqDTO;
+import com.capstone.music.dto.PostTestAnswersDTO;
 import com.capstone.music.service.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,9 @@ public class TestController {
 
     // 테스트 시작 + 결과 응답
     @PostMapping("/test/user/{user_id}")
-    public ResponseEntity<String> join(@PathVariable Long user_id) throws IOException {
+    public ResponseEntity<String> test(@PathVariable Long user_id, PostTestAnswersDTO postTestAnswersDTO) throws IOException {
+        String result = testService.test(user_id, postTestAnswersDTO);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
