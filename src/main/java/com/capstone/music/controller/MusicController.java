@@ -26,7 +26,7 @@ public class MusicController {
         } else if (feeling == "peaceful") {
             dirName = "peaceful";
         } else {
-            dirName = "happy"; // 기본값
+            dirName = "excited"; // 기본값
         }
 
         String uploadImageUrl = s3Uploader.upload(multipartFile, dirName);
