@@ -19,14 +19,14 @@ public class MusicController {
     public ResponseEntity<String> addMusic(@RequestPart("music") MultipartFile multipartFile, @RequestParam("feeling") String feeling) throws Exception {
         String dirName;
 
-        if (feeling == "excited") {
-            dirName = "excited";
-        } else if (feeling == "sad") {
-            dirName = "sad";
-        } else if (feeling == "peaceful") {
-            dirName = "peaceful";
+        if (feeling == "stressed") {
+            dirName = "stressed";
+        } else if (feeling == "soStressed") {
+            dirName = "soStressed";
+        } else if (feeling == "superStressed") {
+            dirName = "superStressed";
         } else {
-            dirName = "excited"; // 기본값
+            dirName = "stressed"; // 기본값
         }
 
         String uploadImageUrl = s3Uploader.upload(multipartFile, dirName);
