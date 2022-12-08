@@ -20,8 +20,8 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/join")
-    public ResponseEntity<String> join(@RequestPart("image") MultipartFile multipartFile, @RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("nickname") String nickname, @RequestParam("introduce") String introduce) throws IOException {
-        authService.join(multipartFile, username, password, nickname, introduce);
+    public ResponseEntity<String> join(@RequestBody JoinReqDTO joinReqDTO) throws IOException {
+        authService.join(joinReqDTO);
         return new ResponseEntity<>("회원가입 완료", HttpStatus.OK);
     }
 
