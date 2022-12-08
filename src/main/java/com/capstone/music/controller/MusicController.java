@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Objects;
+
 @RequiredArgsConstructor
 @RestController
 public class MusicController {
@@ -19,16 +21,15 @@ public class MusicController {
     public ResponseEntity<String> addMusic(@RequestPart("music") MultipartFile multipartFile, @RequestParam("feeling") String feeling) throws Exception {
         String dirName;
 
-        if (feeling == "stressed") {
+        if (Objects.equals(feeling, "stressed")) {
             dirName = "stressed";
-        } else if (feeling == "soStressed") {
+        } else if (Objects.equals(feeling, "soStressed")) {
             dirName = "soStressed";
-        } else if (feeling == "superStressed") {
+        } else if (Objects.equals(feeling, "superStressed")) {
             dirName = "superStressed";
         } else {
             dirName = "stressed"; // 기본값
         }
-
         String uploadImageUrl = s3Uploader.upload(multipartFile, dirName);
         musicService.save(uploadImageUrl, dirName);
         return new ResponseEntity<String>("업로드 완료", HttpStatus.OK);
