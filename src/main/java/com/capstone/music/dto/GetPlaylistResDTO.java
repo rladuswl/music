@@ -12,5 +12,5 @@ public class GetPlaylistResDTO {
     private Long playlist_id;
     private String name;
     private String image;
-    private List<Music> musics;
+    private List<GetMusicResDTO> musics;
 }

@@ -1,9 +1,6 @@
 package com.capstone.music.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -16,9 +13,11 @@ public class MusicPlaylist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "music_id")
     private Music music;
+
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;

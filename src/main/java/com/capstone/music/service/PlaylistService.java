@@ -5,6 +5,7 @@ import com.capstone.music.domain.Music;
 import com.capstone.music.domain.MusicPlaylist;
 import com.capstone.music.domain.Playlist;
 import com.capstone.music.domain.User;
+import com.capstone.music.dto.GetMusicResDTO;
 import com.capstone.music.dto.GetPlaylistResDTO;
 import com.capstone.music.repository.MusicPlaylistRepository;
 import com.capstone.music.repository.MusicRepository;
@@ -35,11 +36,17 @@ public class PlaylistService {
 
         for (Playlist p : playlistList) {
             List<MusicPlaylist> musicPlaylists = musicPlaylistRepository.findByPlaylistId(p.getId());
-            List<Music> musicList = new ArrayList<>();
+            List<GetMusicResDTO> musicList = new ArrayList<>();
 
             for (MusicPlaylist mp : musicPlaylists) {
-                musicList.add(mp.getMusic());
+                GetMusicResDTO getMusicResDTO = GetMusicResDTO.builder()
+                        .id(mp.getMusic().getId())
+                        .title(mp.getMusic().getTitle())
+                        .file(mp.getMusic().getFile())
+                        .feeling(mp.getMusic().getFeeling()).build();
+                musicList.add(getMusicResDTO);
             }
+
             GetPlaylistResDTO getPlaylistResDTO = GetPlaylistResDTO.builder()
                     .playlist_id(p.getId())
                     .musics(musicList)
@@ -47,6 +54,7 @@ public class PlaylistService {
                     .image(p.getImage()).build();
             getPlaylistResDTOList.add(getPlaylistResDTO);
         }
+
         return getPlaylistResDTOList;
     }
 
@@ -54,12 +62,18 @@ public class PlaylistService {
         Optional<Playlist> playlist = playlistRepository.findById(playlist_id);
         List<MusicPlaylist> musicPlaylistList = musicPlaylistRepository.findByPlaylistId(playlist_id);
 
-        List<Music> musicList = new ArrayList<>();
+        List<GetMusicResDTO> musicList = new ArrayList<>();
         for (MusicPlaylist mp: musicPlaylistList) {
-            musicList.add(mp.getMusic());
+            GetMusicResDTO getMusicResDTO = GetMusicResDTO.builder()
+                    .id(mp.getMusic().getId())
+                    .title(mp.getMusic().getTitle())
+                    .file(mp.getMusic().getFile())
+                    .feeling(mp.getMusic().getFeeling()).build();
+            musicList.add(getMusicResDTO);
         }
 
         return GetPlaylistResDTO.builder()
+                .playlist_id(playlist.get().getId())
                 .name(playlist.get().getName())
                 .image(playlist.get().getImage())
                 .musics(musicList).build();
