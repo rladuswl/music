@@ -40,8 +40,8 @@ public class PlaylistController {
 
     // 플레이리스트 수정
     @PatchMapping("/playlist/{playlist_id}")
-    public ResponseEntity<String> updatePlaylist(@RequestPart("image") MultipartFile multipartFile, @RequestParam String name, @PathVariable Long playlist_id) throws IOException {
-        playlistService.updatePlaylist(multipartFile, name, playlist_id);
+    public ResponseEntity<String> updatePlaylist(@RequestParam("name") String name, @PathVariable Long playlist_id) throws IOException {
+        playlistService.updatePlaylist(name, playlist_id);
         return new ResponseEntity<>("플레이리스트 수정 완료", HttpStatus.OK);
     }
 

@@ -92,14 +92,13 @@ public class PlaylistService {
         return playlist.getId();
     }
 
-    public String updatePlaylist(MultipartFile multipartFile, String name, Long playlist_id) throws IOException {
+    public String updatePlaylist(String name, Long playlist_id) throws IOException {
         Optional<Playlist> playlist = playlistRepository.findById(playlist_id);
 
-        s3Uploader.deleteS3("playlist", playlist.get().getImage());
-        String newImageUrl = s3Uploader.upload(multipartFile, "playlist");
+        // s3Uploader.deleteS3("playlist", playlist.get().getImage());
+        // String newImageUrl = s3Uploader.upload(multipartFile, "playlist");
 
         playlist.get().setName(name);
-        playlist.get().setImage(newImageUrl);
         playlistRepository.save(playlist.get());
 
         return "playlist 수정 완료";
