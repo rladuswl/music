@@ -19,7 +19,7 @@ public class TestController {
 
     // 테스트 시작 + 결과 응답
     @PostMapping("/test/user/{user_id}")
-    public ResponseEntity<String> test(@PathVariable Long user_id, PostTestAnswersDTO postTestAnswersDTO) throws IOException {
+    public ResponseEntity<String> test(@PathVariable Long user_id, @RequestBody PostTestAnswersDTO postTestAnswersDTO) throws IOException {
         String result = testService.test(user_id, postTestAnswersDTO);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
