@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class AuthService {
     }
 
     public LoginResDTO login(LoginReqDTO loginReqDTO) throws IOException {
-        User user = userRepository.findByUsername(loginReqDTO.getUsername());
+        User user = userRepository.findByUsernameAndPassword(loginReqDTO.getUsername(), loginReqDTO.getPassword());
 
         LoginResDTO loginResDTO = LoginResDTO.builder()
                 .id(user.getId()).build();
